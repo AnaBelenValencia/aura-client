@@ -6,6 +6,7 @@ export function Profile() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  // Fetch user profile when component mounts
   useEffect(() => {
     getProfile()
       .then(data => setUser(data))
@@ -13,7 +14,10 @@ export function Profile() {
       .finally(() => setLoading(false))
   }, [])
 
+  // Render loading message
   if (loading) return <p className="text-gray-600">Loading profil...</p>
+
+  // Render error message
   if (error) return <p className="text-red-600">Error: {error}</p>
 
   return (

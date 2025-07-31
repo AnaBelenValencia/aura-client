@@ -10,6 +10,7 @@ export function EditProfile() {
   const [submitError, setSubmitError] = useState('')
   const [submitSuccess, setSubmitSuccess] = useState('')
 
+  // Initialize react-hook-form with Zod validation
   const {
     register,
     handleSubmit,
@@ -19,9 +20,11 @@ export function EditProfile() {
     resolver: zodResolver(editProfileSchema)
   })
 
+  // Fetch the current user's profile when the component mounts
   useEffect(() => {
     getProfile()
       .then(data => {
+        // Populate form fields with fetched profile data
         setValue('firstName', data.firstName)
         setValue('lastName', data.lastName)
       })
@@ -29,6 +32,9 @@ export function EditProfile() {
       .finally(() => setLoading(false))
   }, [setValue])
 
+  /**
+   * Handles form submission by calling the updateProfile API.
+   */
   const onSubmit = async (data: EditProfileInput) => {
     setSubmitError('')
     setSubmitSuccess('')
@@ -41,7 +47,10 @@ export function EditProfile() {
     }
   }
 
+  // Render loading state
   if (loading) return <p className="text-gray-600">Loading profile...</p>
+  
+  // Render error if present and not related to form validation
   if (submitError && !errors.firstName && !errors.lastName)
     return <p className="text-red-600">Error: {submitError}</p>
 

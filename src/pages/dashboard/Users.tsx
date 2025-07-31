@@ -12,6 +12,7 @@ export function Users() {
   const [selectedUser, setSelectedUser] = useState<any | null>(null)
   const [editUser, setEditUser] = useState<any | null>(null)
 
+  // Fetch user list when component mounts
   useEffect(() => {
     getUsers()
       .then(setUsers)
@@ -19,7 +20,10 @@ export function Users() {
       .finally(() => setLoading(false))
   }, [])
 
+  // Render loading message
   if (loading) return <p className="text-gray-600">Loading users...</p>
+
+  // Render error message
   if (error) return <p className="text-red-600">Error: {error}</p>
 
   return (

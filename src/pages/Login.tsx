@@ -9,9 +9,12 @@ import { Link } from 'react-router-dom'
 
 export function Login() {
   const navigate = useNavigate()
+
+  // Local state for error messages and loading spinner
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // Initialize react-hook-form with Zod validation schema
   const {
     register,
     handleSubmit,
@@ -20,6 +23,9 @@ export function Login() {
     resolver: zodResolver(loginSchema)
   })
 
+  /**
+   * Handles login form submission, sends login request to backend, saves token and redirects to dashboard
+   */
   const onSubmit = async (data: LoginInput) => {
     setLoading(true)
     setErrorMessage('')

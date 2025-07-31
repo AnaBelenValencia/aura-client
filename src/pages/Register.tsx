@@ -11,6 +11,7 @@ export function Register() {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // Initialize react-hook-form with Zod schema for validation
   const {
     register,
     handleSubmit,
@@ -19,6 +20,9 @@ export function Register() {
     resolver: zodResolver(registerSchema)
   })
 
+  /**
+   * Handles the form submission, calls the register API, redirects to login page on success and displays error message on failure
+   */
   const onSubmit = async (data: RegisterInput) => {
     setLoading(true)
     setErrorMessage('')

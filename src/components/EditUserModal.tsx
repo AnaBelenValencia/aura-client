@@ -13,7 +13,11 @@ type Props = {
   onSuccess?: () => void
 }
 
+/**
+ * EditUserModal is a modal form component that allows users to update their profile information.
+*/
 export function EditUserModal({ user, onClose, onSuccess }: Props) {
+  // Initialize react-hook-form with default values from the user object
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
       firstName: user.firstName,
@@ -22,6 +26,10 @@ export function EditUserModal({ user, onClose, onSuccess }: Props) {
     }
   })
 
+  /**
+   * Handles form submission by calling the updateProfile API.
+   * Closes the modal and triggers the onSuccess callback if provided.
+   */
   const onSubmit = async (data: any) => {
     try {
       await updateProfile(data)
